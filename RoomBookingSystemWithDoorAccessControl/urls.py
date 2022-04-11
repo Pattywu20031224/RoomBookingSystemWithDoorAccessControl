@@ -22,4 +22,18 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(template_name='homepage.html', extra_context={'title':'歡迎光臨'}), name='home'),
+    path('user/', include('django.contrib.auth.urls')),
 ]
+
+# 加入靜態檔案的處理規則
+urlpatterns += static(
+    settings.STATIC_URL, 
+    document_root=settings.STATIC_ROOT
+)
+
+# 加入使用者上傳檔案的處理規則
+urlpatterns += static(
+    settings.MEDIA_URL, 
+    document_root=settings.MEDIA_ROOT
+)
