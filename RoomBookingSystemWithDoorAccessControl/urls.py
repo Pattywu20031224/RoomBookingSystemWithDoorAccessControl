@@ -22,8 +22,12 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='homepage.html', extra_context={'title':'歡迎光臨'}), name='home'),
+    path('', TemplateView.as_view(template_name='homepage.html'), name='homepage'),
     path('user/', include('django.contrib.auth.urls')),
+    path('user/', include('user.urls')),
+    path('log/', include('log.urls')),
+    path('room/', include('room.urls')),
+    path('classes/', include('classes.urls')),
 ]
 
 # 加入靜態檔案的處理規則
