@@ -19,17 +19,13 @@ class SuperuserRequiredMixin(AccessMixin):
 class UserRegister(CreateView):
     extra_context = {'title': '使用者註冊'}
     model = User
-    fields = ['username', 'first_name', 'last_name', 'email', 'password']
+    fields = ['username', 'password'] 
     template_name = 'form.html'
-    success_url = reverse_lazy('home')  # 註冊完成返回首頁
+    success_url = reverse_lazy('homepage')  # 註冊完成返回首頁
 
     # 取得要顯示的表單內容
     def get_form(self):
         form = super().get_form()
-        form.fields['first_name'].label = '真實姓名'
-        form.fields['first_name'].required = True
-        form.fields['last_name'].label = '學校名稱'
-        form.fields['last_name'].required = True
         form.fields['password2'] = forms.CharField(label='密碼驗證', max_length=255)
         return form
 
@@ -59,16 +55,12 @@ class UserView(SuperuserRequiredMixin, DetailView):
     context_object_name = 'tuser'
 class UserEdit(SuperuserRequiredMixin, UpdateView):
     model = User
-    fields = ['username', 'first_name', 'last_name', 'email']
+    fields = ['username']
     success_url = reverse_lazy('user_list')
     template_name = 'form.html'
 
     def get_form(self):
         form = super().get_form()
-        form.fields['first_name'].label = '真實姓名'
-        form.fields['first_name'].required = True
-        form.fields['last_name'].label = '班級座號'
-        form.fields['last_name'].required = True
         return form
 class UserPasswordUpdate(SuperuserRequiredMixin, UpdateView):
     model = User

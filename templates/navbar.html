@@ -1,7 +1,7 @@
 <!-- Navbar begin //-->
 <nav class="navbar navbar-expand-md navbar-dark bg-info mb-2">
     <!-- 網站標誌 -->
-    <div class="navbar-brand">教室預約系統</div>
+    <a class="navbar-brand" href="/">教室預約系統</a>
     <!-- 在小螢幕的設備上顯示可展開/收合導覽選單的按鈕 -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -10,6 +10,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <li class="nav-item">
+                  <a href="{% url 'user_list' %}" class="nav-link">
+                    <i class="fas fa-users"></i> 帳號列表
+                  </a>
+                </li>
+            {% endif %}
         <li class="nav-item">
           <a href="{% url 'logout' %}" class="nav-link">
             <i class="fas fa-sign-out-alt"></i> 登出 {{ user.username }}

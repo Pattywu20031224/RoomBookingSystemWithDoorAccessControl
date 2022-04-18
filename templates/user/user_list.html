@@ -3,14 +3,12 @@
 {% load user_tags %}
 
 {% block content %}
-<div class="card">
+<a href="{% url 'user_register' %}" class="btn btn-sm btn-primary">新增帳號</a><div class="card">
   <div id="user-list" class="card-body">
     <table class="table table-sm">
       <thead>
         <tr>
           <th>帳號</th>
-          <th>姓名</th>
-          <th>班級座號</th>
           <th>教師</th>
           <th>操作</th>
         </tr>
@@ -21,8 +19,6 @@
           <td>
             <a href="{% url 'user_view' user.id %}">{{ user.username }}</a>
           </td>
-          <td>{{ user.first_name }}</td>
-          <td>{{ user.last_name }}</td>
           
           <td>{% if user|is_teacher %}<i class="fas fa-check"></i>{% endif %}</td>
           <td>
