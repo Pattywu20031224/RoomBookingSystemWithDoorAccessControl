@@ -10,6 +10,7 @@
         <tr>
           <th>帳號</th>
           <th>教師</th>
+          <th>學生</th>
           <th>操作</th>
         </tr>
       </thead>
@@ -21,10 +22,13 @@
           </td>
           
           <td>{% if user|is_teacher %}<i class="fas fa-check"></i>{% endif %}</td>
+          <td>{% if user|is_student %}<i class="fas fa-check"></i>{% endif %}</td>
+          
           <td>
             <a href="{% url 'user_edit' user.id %}" class="btn btn-sm btn-primary">修改</a>
             <a href="{% url 'user_password' user.id %}" class="btn btn-sm btn-secondary">密碼</a>
             <a href="{% url 'user_teacher_toggle' user.id %}?next={{ request.path|urlencode }}" class="btn btn-sm btn-light">切換教師</a>
+            <a href="{% url 'user_student_toggle' user.id %}?next={{ request.path|urlencode }}" class="btn btn-sm btn-light">切換學生</a>
           </td>
         </tr>
         {% endfor %}

@@ -99,6 +99,20 @@ class UserTeacherToggle(SuperuserRequiredMixin, RedirectView):
         else: 
             group.user_set.add(user)
         return self.request.META.get('HTTP_REFERER', '/')
+class UserStudentToggle(SuperuserRequiredMixin, RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        user = User.objects.get(id=self.kwargs['uid'])
+        try :
+            group = Group.objects.get(name="student")	
+        except ObjectDoesNotExist :
+            group = Group(name="student")
+            group.save()
+
+        if user.groups.filter(name='student').exists():
+            group.user_set.remove(user)
+        else: 
+            group.user_set.add(user)
+        return self.request.META.get('HTTP_REFERER', '/')
 class UserDashboard(LoginRequiredMixin, TemplateView):
     extra_context = {'title': '我的儀表板'}
     template_name = 'user/user_detail.html'

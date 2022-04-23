@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:pk>/edit/', UserEdit.as_view(), name='user_edit'),
     path('<int:pk>/password/', UserPasswordUpdate.as_view(), name='user_password'),
     path('<int:uid>/teacher/', UserTeacherToggle.as_view(), name='user_teacher_toggle'),
+    path('<int:uid>/student/', UserStudentToggle.as_view(), name='user_student_toggle'),
 ]
